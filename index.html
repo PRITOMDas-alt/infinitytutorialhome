@@ -16,28 +16,13 @@
             padding: 20px;
         }
 
-        .card {
-            background-color: orange;
-            margin: 10px;
-            padding: 15px;
-            border-radius: 10px;
-            width: 200px;
-            display: inline-block;
-            transition: 0.3s;
-        }
-
-        .card:hover {
-            background-color: darkorange;
-            transform: scale(1.05);
-            font-weight: bold;
-        }
-
         .form-box {
             background-color: white;
             padding: 20px;
             margin: 20px auto;
             width: 300px;
             border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
 
         input, select {
@@ -51,12 +36,22 @@
             background-color: orange;
             border: none;
             cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background-color: darkorange;
         }
 
         table {
             margin: auto;
             margin-top: 20px;
             border-collapse: collapse;
+            background-color: white;
+        }
+
+        th {
+            background-color: orange;
         }
 
         th, td {
@@ -118,11 +113,19 @@
             let school = document.getElementById("school").value;
             let gender = document.getElementById("gender").value;
 
+            if(name === "" || school === "") {
+                alert("Please fill all fields!");
+                return;
+            }
+
             let students = JSON.parse(localStorage.getItem("students")) || [];
 
             students.push({name, cls, school, gender});
 
             localStorage.setItem("students", JSON.stringify(students));
+
+            document.getElementById("name").value = "";
+            document.getElementById("school").value = "";
 
             showData();
         }

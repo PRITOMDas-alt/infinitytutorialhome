@@ -13,50 +13,38 @@
 
         .header {
             background-color: #ffcc80;
+            color: black;
             padding: 20px;
         }
 
-        .form-box {
-            background-color: white;
-            padding: 20px;
-            margin: 20px auto;
-            width: 300px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-
-        input, select {
-            margin: 5px;
-            padding: 8px;
-            width: 90%;
-        }
-
-        button {
-            padding: 10px;
-            background-color: orange;
-            border: none;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        button:hover {
-            background-color: darkorange;
-        }
-
-        table {
+        .about {
+            width: 70%;
             margin: auto;
-            margin-top: 20px;
-            border-collapse: collapse;
             background-color: white;
+            padding: 15px;
+            border-radius: 10px;
         }
 
-        th {
+        .teachers {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .card {
             background-color: orange;
+            margin: 10px;
+            padding: 15px;
+            border-radius: 10px;
+            width: 200px;
+            transition: 0.3s;
+            cursor: pointer;
         }
 
-        th, td {
-            border: 1px solid black;
-            padding: 8px;
+        .card:hover {
+            background-color: darkorange;
+            transform: scale(1.05);
+            font-weight: bold;
         }
     </style>
 
@@ -66,96 +54,62 @@
 
     <div class="header">
         <h1>Infinity Tutorial Home</h1>
+        <p>📍 Panjabi lane, beside of pahartali girls school, 9 no. lane, pahartali, chattogram.</p>
     </div>
 
-    <h2>👨‍🎓 Student Login</h2>
+    <h2>👨‍🏫 Director: Roni Sir</h2>
 
-    <div class="form-box">
-        <input type="text" id="name" placeholder="Name"><br>
-        
-        <select id="class">
-            <option>Class 4</option>
-            <option>Class 5</option>
-            <option>Class 6</option>
-            <option>Class 7</option>
-            <option>Class 8</option>
-            <option>Class 9</option>
-            <option>Class 10</option>
-            <option>Class 11</option>
-            <option>Class 12</option>
-        </select><br>
+    <h2 style="color: darkorange;">📘 About Our Coaching</h2>
+    <p class="about">
+        Classes are held daily for 2 hours. There are separate groups for boys and girls in each class,
+        where they can understand the lessons they find difficult. Daily homework is given, and
+        attractive rewards are provided for completing homework. Every year we arrange Iftar party,
+        class party, and picnic.
+    </p>
 
-        <input type="text" id="school" placeholder="School"><br>
+    <h2 style="margin-top: 30px;">👨‍🏫 Our Teachers</h2>
 
-        <select id="gender">
-            <option>Male</option>
-            <option>Female</option>
-        </select><br>
+    <div class="teachers">
 
-        <button onclick="saveData()">Submit</button>
+        <div class="card">
+            📖 Bangla 1st Paper<br><b>Palash Sir</b>
+        </div>
+
+        <div class="card">
+            📖 Bangla 2nd Paper<br><b>Basu Sir</b>
+        </div>
+
+        <div class="card">
+            🇬🇧 English 1st Paper<br><b>Mithun Sir</b>
+        </div>
+
+        <div class="card">
+            🇬🇧 English 2nd Paper<br><b>Ifti Sir</b>
+        </div>
+
+        <div class="card">
+            ➗ Math<br><b>Roni Sir</b>
+        </div>
+
+        <div class="card">
+            🔬 Physics, Chemistry, Higher Math<br><b>Roni Sir</b>
+        </div>
+
+        <div class="card">
+            🌿 Biology<br><b>Akib Sir</b>
+        </div>
+
     </div>
 
-    <h2>📋 Student List</h2>
+    <h2 style="color: darkred; margin-top: 30px;">📞 Contact</h2>
+    <p style="font-size: 18px;">
+        01319240208<br>
+        01851584595
+    </p>
 
-    <table id="table">
-        <tr>
-            <th>Name</th>
-            <th>Class</th>
-            <th>School</th>
-            <th>Gender</th>
-        </tr>
-    </table>
-
-    <script>
-        function saveData() {
-            let name = document.getElementById("name").value;
-            let cls = document.getElementById("class").value;
-            let school = document.getElementById("school").value;
-            let gender = document.getElementById("gender").value;
-
-            if(name === "" || school === "") {
-                alert("Please fill all fields!");
-                return;
-            }
-
-            let students = JSON.parse(localStorage.getItem("students")) || [];
-
-            students.push({name, cls, school, gender});
-
-            localStorage.setItem("students", JSON.stringify(students));
-
-            document.getElementById("name").value = "";
-            document.getElementById("school").value = "";
-
-            showData();
-        }
-
-        function showData() {
-            let students = JSON.parse(localStorage.getItem("students")) || [];
-
-            let table = document.getElementById("table");
-
-            table.innerHTML = `
-            <tr>
-                <th>Name</th>
-                <th>Class</th>
-                <th>School</th>
-                <th>Gender</th>
-            </tr>`;
-
-            students.forEach(s => {
-                table.innerHTML += `
-                <tr>
-                    <td>${s.name}</td>
-                    <td>${s.cls}</td>
-                    <td>${s.school}</td>
-                    <td>${s.gender}</td>
-                </tr>`;
-            });
-        }
-
-        showData();
-    </script>
+    <p style="margin-top: 40px; font-size: 14px; color: gray;">
+        Website Developer: Pritom Das
+    </p>
 
 </body>
 </html>

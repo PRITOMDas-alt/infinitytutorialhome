@@ -13,22 +13,7 @@
 
         .header {
             background-color: #ffcc80;
-            color: black;
             padding: 20px;
-        }
-
-        .about {
-            width: 70%;
-            margin: auto;
-            background-color: white;
-            padding: 15px;
-            border-radius: 10px;
-        }
-
-        .teachers {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
         }
 
         .card {
@@ -37,14 +22,46 @@
             padding: 15px;
             border-radius: 10px;
             width: 200px;
+            display: inline-block;
             transition: 0.3s;
-            cursor: pointer;
         }
 
         .card:hover {
             background-color: darkorange;
             transform: scale(1.05);
             font-weight: bold;
+        }
+
+        .form-box {
+            background-color: white;
+            padding: 20px;
+            margin: 20px auto;
+            width: 300px;
+            border-radius: 10px;
+        }
+
+        input, select {
+            margin: 5px;
+            padding: 8px;
+            width: 90%;
+        }
+
+        button {
+            padding: 10px;
+            background-color: orange;
+            border: none;
+            cursor: pointer;
+        }
+
+        table {
+            margin: auto;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
         }
     </style>
 
@@ -54,62 +71,88 @@
 
     <div class="header">
         <h1>Infinity Tutorial Home</h1>
-        <p>📍 Panjabi lane, beside of pahartali girls school, 9 no. lane, pahartali, chattogram.</p>
     </div>
 
-    <h2>👨‍🏫 Director: Roni Sir</h2>
+    <h2>👨‍🎓 Student Login</h2>
 
-    <h2 style="color: darkorange;">📘 About Our Coaching</h2>
-    <p class="about">
-        Classes are held daily for 2 hours. There are separate groups for boys and girls in each class,
-        where they can understand the lessons they find difficult. Daily homework is given, and
-        attractive rewards are provided for completing homework. Every year we arrange Iftar party,
-        class party, and picnic.
-    </p>
+    <div class="form-box">
+        <input type="text" id="name" placeholder="Name"><br>
+        
+        <select id="class">
+            <option>Class 4</option>
+            <option>Class 5</option>
+            <option>Class 6</option>
+            <option>Class 7</option>
+            <option>Class 8</option>
+            <option>Class 9</option>
+            <option>Class 10</option>
+            <option>Class 11</option>
+            <option>Class 12</option>
+        </select><br>
 
-    <h2 style="margin-top: 30px;">👨‍🏫 Our Teachers</h2>
+        <input type="text" id="school" placeholder="School"><br>
 
-    <div class="teachers">
+        <select id="gender">
+            <option>Male</option>
+            <option>Female</option>
+        </select><br>
 
-        <div class="card">
-            📖 Bangla 1st Paper<br><b>Palash Sir</b>
-        </div>
-
-        <div class="card">
-            📖 Bangla 2nd Paper<br><b>Basu Sir</b>
-        </div>
-
-        <div class="card">
-            🇬🇧 English 1st Paper<br><b>Mithun Sir</b>
-        </div>
-
-        <div class="card">
-            🇬🇧 English 2nd Paper<br><b>Ifti Sir</b>
-        </div>
-
-        <div class="card">
-            ➗ Math<br><b>Roni Sir</b>
-        </div>
-
-        <div class="card">
-            🔬 Physics, Chemistry, Higher Math<br><b>Roni Sir</b>
-        </div>
-
-        <div class="card">
-            🌿 Biology<br><b>Akib Sir</b>
-        </div>
-
+        <button onclick="saveData()">Submit</button>
     </div>
 
-    <h2 style="color: darkred; margin-top: 30px;">📞 Contact</h2>
-    <p style="font-size: 18px;">
-        01319240208<br>
-        01851584595
-    </p>
+    <h2>📋 Student List</h2>
 
-    <p style="margin-top: 40px; font-size: 14px; color: gray;">
-        Website Developer: Pritom Das
-    </p>
+    <table id="table">
+        <tr>
+            <th>Name</th>
+            <th>Class</th>
+            <th>School</th>
+            <th>Gender</th>
+        </tr>
+    </table>
+
+    <script>
+        function saveData() {
+            let name = document.getElementById("name").value;
+            let cls = document.getElementById("class").value;
+            let school = document.getElementById("school").value;
+            let gender = document.getElementById("gender").value;
+
+            let students = JSON.parse(localStorage.getItem("students")) || [];
+
+            students.push({name, cls, school, gender});
+
+            localStorage.setItem("students", JSON.stringify(students));
+
+            showData();
+        }
+
+        function showData() {
+            let students = JSON.parse(localStorage.getItem("students")) || [];
+
+            let table = document.getElementById("table");
+
+            table.innerHTML = `
+            <tr>
+                <th>Name</th>
+                <th>Class</th>
+                <th>School</th>
+                <th>Gender</th>
+            </tr>`;
+
+            students.forEach(s => {
+                table.innerHTML += `
+                <tr>
+                    <td>${s.name}</td>
+                    <td>${s.cls}</td>
+                    <td>${s.school}</td>
+                    <td>${s.gender}</td>
+                </tr>`;
+            });
+        }
+
+        showData();
+    </script>
 
 </body>
 </html>
